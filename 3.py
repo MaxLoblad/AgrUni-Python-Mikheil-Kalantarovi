@@ -1,11 +1,35 @@
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+print("მაგალითი 1:")
+print(f"LCM of 1000 and 400 is {lcm(1000, 400)}")
+
+print("მაგალითი 2:")
+print(f"LCM of 10000 and 17 is {lcm(500, 50)}")
 
 
-str0 = input('Input date: ')
-str1 = str0.split('-')
-str2 = str1[2].split(':')
-str3 = str2[0].split('T')
-str4 = str2[2].split('.')
-str5 = str0[-6:len(str0)]
+while True:
+    z = 1
+    try:
+        a = int(input("Enter a: "))
+        b = int(input("Enter b: "))
+        if a < 1 or b < 1:
+            print("Error: numbers must be >= 1.")
+            z = 0
+        if a > 10000 or b > 10000:
+            print("Error: numbers must be <= 10000.")
+            z = 0
+    except ValueError:
+        print("Error: numbers must be integers.")
+        z = 0
 
-print(str3[0],'-',str1[1],'-',str1[0],' ',int(str3[1])%12,':',
-      str2[1],':',str4[0],' ',str5[0],int(str5[1:3]),sep='')
+    if z == 1:
+        result = lcm(a, b)
+        break
+
+print(f"LCM of {a} and {b} is {result}")
