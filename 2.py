@@ -1,40 +1,21 @@
-employees = [
-    {"name": "Alice", "tasks": [5, 7, 9], "department": "IT"},
-    {"name": "Bob", "tasks": [2, 3, 4], "department": "Sales"},
-    {"name": "Charlie", "tasks": [8, 7, 6], "department": "IT"},
-    {"name": "Diana", "tasks": [9, 8, 10], "department": "Marketing"},
-    {"name": "George", "tasks": [2, 7, 6], "department": "IT"}
-]
 
-averaged = list(map(
-    lambda emp: {
-        "name": emp["name"],
-        "department": emp["department"],
-        "average_tasks": sum(emp["tasks"]) // len(emp["tasks"])
-    },
-    employees
-))
+with open("D:/Users/mistik/Desktop/data.txt", "r") as data_file, \
+     open("D:/Users/mistik/Desktop/small.txt", "w") as small_file, \
+     open("D:/Users/mistik/Desktop/high.txt", "w") as high_file:
 
-avgIT = list(filter(
-    lambda x: x["department"] == "IT" and x["average_tasks"] > 6,
-    averaged
-))
+    for line in data_file:
+        line = line.strip()
+        if not line:
+            continue
 
+        user, product, amount, price = line.split(",")
 
-#1
-for item in averaged:
-    print(item)
-print('\n')
+        amount = int(amount)
+        price = float(price)
 
-#2
-sorted_employees = sorted(averaged, key=lambda x: x["average_tasks"], reverse=True)
-for item in sorted_employees:
-    print(item)
-print('\n')
+        total_cost = amount * price
 
-#3
-top_employee = max(averaged, key=lambda x: x["average_tasks"])
-print(top_employee,'\n')
-
-#4
-print(avgIT,'\n')
+        if total_cost < 10:
+            small_file.write(line + "\n")
+        else:
+            high_file.write(line + "\n")
